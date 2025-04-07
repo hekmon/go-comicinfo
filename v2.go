@@ -16,7 +16,6 @@ const (
 )
 
 // ComicInfoComicInfov2 represents the structure of a version 2 ComicInfo.xml file.
-// Documentation can be found here: https://anansi-project.github.io/fr/docs/comicinfo/documentation
 type ComicInfov2 struct {
 	Title               string   `xml:"Title,omitempty"`               // Title of the book.
 	Series              string   `xml:"Series,omitempty"`              // Title of the series the book is part of.
