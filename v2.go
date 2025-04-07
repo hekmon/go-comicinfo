@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"math"
 )
 
 const (
@@ -23,7 +24,7 @@ type ComicInfov2 struct {
 	SeriesGroup         string   `xml:"SeriesGroup,omitempty"`         // A group or collection the series belongs to. It is accepted that multiple values are comma separated.
 	AgeRating           string   `xml:"AgeRating,omitempty"`           // The age rating of the book. Possible values are "Unknown", "Everyone", "Teen", "Mature", "Adults Only 18+", "Not Yet Rated".
 	Pages               PagesV2  `xml:"Pages,omitempty"`               // Pages of the comic book. Each page should have an Image element with a file path to the image.
-	CommunityRating     *float64 `xml:"CommunityRating,omitempty"`     // Community rating of the book, from 0.0 to 5.0.
+	CommunityRating     *float64 `xml:"CommunityRating,omitempty"`     // Community rating of the book, from 0.0 to 5.0, 2 digits allowed.
 	MainCharacterOrTeam string   `xml:"MainCharacterOrTeam,omitempty"` // Main character or team mentioned in the book. It is accepted that a single value should be present.
 	Review              string   `xml:"Review,omitempty"`              // Review of the book.
 }
@@ -135,5 +136,15 @@ func isV2CommunityRatingValid(value *float64) bool {
 	if value == nil {
 		return true
 	}
-	return *value >= 0 && *value <= 5
+	if *value < 0 {
+		return false
+	}
+	if *value > 5 {
+		return false
+	}
+	// 2 digits allowed
+	if math.Abs(*value-math.Round(*value*100)/100) > 0.01 {
+		return false
+	}
+	return true
 }
