@@ -29,6 +29,13 @@ type ComicInfov1 struct {
 	Notes           string `xml:"Notes,omitempty"`           // A free text field, usually used to store information about the application that created the ComicInfo.xml file.
 	Year            int    `xml:"Year,omitempty"`            // Usually contains the release date of the book.
 	Month           int    `xml:"Month,omitempty"`           // Usually contains the release date of the book.
+	Writer          string `xml:"Writer,omitempty"`          // Person or organization responsible for creating the scenario. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
+	Penciller       string `xml:"Penciller,omitempty"`       // Person or organization responsible for drawing the art. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
+	Inker           string `xml:"Inker,omitempty"`           // Person or organization responsible for inking the pencil art. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
+	Colorist        string `xml:"Colorist,omitempty"`        // Person or organization responsible for applying color to drawings. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
+	Letterer        string `xml:"Letterer,omitempty"`        // Person or organization responsible for drawing text and speech bubbles. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
+	CoverArtist     string `xml:"CoverArtist,omitempty"`     // Person or organization responsible for drawing the cover art. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
+	Editor          string `xml:"Editor,omitempty"`          // A person or organization contributing to a resource by revising or elucidating the content, e.g., adding an introduction, notes, or other critical matter. An editor may also prepare a resource for production, publication, or distribution. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
 	Publisher       string `xml:"Publisher,omitempty"`       // A person or organization responsible for publishing, releasing, or issuing a resource.
 	Imprint         string `xml:"Imprint,omitempty"`         // An imprint is a group of publications under the umbrella of a larger imprint or a Publisher. For example, Vertigo is an Imprint of DC Comics.
 	Genre           string `xml:"Genre,omitempty"`           // Genre of the book or series. For example, Science-Fiction or Shonen. It is accepted that multiple values are comma separated.
@@ -39,14 +46,6 @@ type ComicInfov1 struct {
 	BlackAndWhite   YesNo  `xml:"BlackAndWhite,omitempty"`   // Whether the book is in black and white.
 	Manga           Manga  `xml:"Manga,omitempty"`           // Whether the book is a manga. This also defines the reading direction as right-to-left when set to YesAndRightToLeft.
 	Pages           Pages  `xml:"Pages,omitempty"`           // Pages of the comic book. Each page should have an Image element with a file path to the image.
-	// According to the schema, each creator element can only be present once. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
-	Writer      string `xml:"Writer,omitempty"`      // Person or organization responsible for creating the scenario.
-	Penciller   string `xml:"Penciller,omitempty"`   // Person or organization responsible for drawing the art.
-	Inker       string `xml:"Inker,omitempty"`       // Person or organization responsible for inking the pencil art.
-	Colorist    string `xml:"Colorist,omitempty"`    // Person or organization responsible for applying color to drawings.
-	Letterer    string `xml:"Letterer,omitempty"`    // Person or organization responsible for drawing text and speech bubbles.
-	CoverArtist string `xml:"CoverArtist,omitempty"` // Person or organization responsible for drawing the cover art.
-	Editor      string `xml:"Editor,omitempty"`      // A person or organization contributing to a resource by revising or elucidating the content, e.g., adding an introduction, notes, or other critical matter. An editor may also prepare a resource for production, publication, or distribution.
 }
 
 // Encode will produce a ComicInfo v2 XML content. It will validate the ComicInfo struct before encoding it into XML format.
