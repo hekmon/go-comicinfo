@@ -17,28 +17,28 @@ const (
 
 // ComicInfoComicInfov1 represents the structure of a version 1 ComicInfo.xml file.
 type ComicInfov1 struct {
-	Title           string  `xml:"Title,omitempty"`           // Title of the book.
-	Series          string  `xml:"Series,omitempty"`          // Title of the series the book is part of.
-	Number          int     `xml:"Number,omitempty"`          // Number of the book in the series.
-	Count           int     `xml:"Count,omitempty"`           // The total number of books in the series. The Count could be different on each book in a series. Consuming applications should consider using only the value for the latest book in the series.
-	Volume          int     `xml:"Volume,omitempty"`          // Volume containing the book. Volume is a notion that is specific to US Comics, where the same series can have multiple volumes. Volumes can be referenced by number (1, 2, 3…) or by year (2018, 2020…).
-	AlternateSeries string  `xml:"AlternateSeries,omitempty"` // Quite specific to US comics, some books can be part of cross-over story arcs. Those fields can be used to specify an alternate series, its number and count of books.
-	AlternateNumber int     `xml:"AlternateNumber,omitempty"` // Quite specific to US comics, some books can be part of cross-over story arcs. Those fields can be used to specify an alternate series, its number and count of books.
-	AlternateCount  int     `xml:"AlternateCount,omitempty"`  // Quite specific to US comics, some books can be part of cross-over story arcs. Those fields can be used to specify an alternate series, its number and count of books.
-	Summary         string  `xml:"Summary,omitempty"`         // A description or summary of the book.
-	Notes           string  `xml:"Notes,omitempty"`           // A free text field, usually used to store information about the application that created the ComicInfo.xml file.
-	Year            int     `xml:"Year,omitempty"`            // Usually contains the release date of the book.
-	Month           int     `xml:"Month,omitempty"`           // Usually contains the release date of the book.
-	Publisher       string  `xml:"Publisher,omitempty"`       // A person or organization responsible for publishing, releasing, or issuing a resource.
-	Imprint         string  `xml:"Imprint,omitempty"`         // An imprint is a group of publications under the umbrella of a larger imprint or a Publisher. For example, Vertigo is an Imprint of DC Comics.
-	Genre           string  `xml:"Genre,omitempty"`           // Genre of the book or series. For example, Science-Fiction or Shonen. It is accepted that multiple values are comma separated.
-	Web             string  `xml:"Web,omitempty"`             // A URL pointing to a reference website for the book. It is accepted that multiple values are space separated (as spaces in URL will be encoded as %20).
-	PageCount       int     `xml:"PageCount,omitempty"`       // The number of pages in the book.
-	Language        string  `xml:"LanguageISO,omitempty"`     // ISO code of the language the book is written in. You can use "golang.org/x/text/language" to get valid codes, eg language.English.String()
-	Format          string  `xml:"format,omitempty"`          // The original publication's binding format for scanned physical books or presentation format for digital sources. "TBP", "HC", "Web", "Digital" are common designators.
-	BlackAndWhite   string  `xml:"BlackAndWhite,omitempty"`   // Whether the book is in black and white.
-	Manga           string  `xml:"Manga,omitempty"`           // Whether the book is a manga. This also defines the reading direction as right-to-left when set to YesAndRightToLeft.
-	Pages           PagesV1 `xml:"Pages,omitempty"`           // Pages of the comic book. Each page should have an Image element with a file path to the image.
+	Title           string `xml:"Title,omitempty"`           // Title of the book.
+	Series          string `xml:"Series,omitempty"`          // Title of the series the book is part of.
+	Number          int    `xml:"Number,omitempty"`          // Number of the book in the series.
+	Count           int    `xml:"Count,omitempty"`           // The total number of books in the series. The Count could be different on each book in a series. Consuming applications should consider using only the value for the latest book in the series.
+	Volume          int    `xml:"Volume,omitempty"`          // Volume containing the book. Volume is a notion that is specific to US Comics, where the same series can have multiple volumes. Volumes can be referenced by number (1, 2, 3…) or by year (2018, 2020…).
+	AlternateSeries string `xml:"AlternateSeries,omitempty"` // Quite specific to US comics, some books can be part of cross-over story arcs. Those fields can be used to specify an alternate series, its number and count of books.
+	AlternateNumber int    `xml:"AlternateNumber,omitempty"` // Quite specific to US comics, some books can be part of cross-over story arcs. Those fields can be used to specify an alternate series, its number and count of books.
+	AlternateCount  int    `xml:"AlternateCount,omitempty"`  // Quite specific to US comics, some books can be part of cross-over story arcs. Those fields can be used to specify an alternate series, its number and count of books.
+	Summary         string `xml:"Summary,omitempty"`         // A description or summary of the book.
+	Notes           string `xml:"Notes,omitempty"`           // A free text field, usually used to store information about the application that created the ComicInfo.xml file.
+	Year            int    `xml:"Year,omitempty"`            // Usually contains the release date of the book.
+	Month           int    `xml:"Month,omitempty"`           // Usually contains the release date of the book.
+	Publisher       string `xml:"Publisher,omitempty"`       // A person or organization responsible for publishing, releasing, or issuing a resource.
+	Imprint         string `xml:"Imprint,omitempty"`         // An imprint is a group of publications under the umbrella of a larger imprint or a Publisher. For example, Vertigo is an Imprint of DC Comics.
+	Genre           string `xml:"Genre,omitempty"`           // Genre of the book or series. For example, Science-Fiction or Shonen. It is accepted that multiple values are comma separated.
+	Web             string `xml:"Web,omitempty"`             // A URL pointing to a reference website for the book. It is accepted that multiple values are space separated (as spaces in URL will be encoded as %20).
+	PageCount       int    `xml:"PageCount,omitempty"`       // The number of pages in the book.
+	Language        string `xml:"LanguageISO,omitempty"`     // ISO code of the language the book is written in. You can use "golang.org/x/text/language" to get valid codes, eg language.English.String()
+	Format          string `xml:"format,omitempty"`          // The original publication's binding format for scanned physical books or presentation format for digital sources. "TBP", "HC", "Web", "Digital" are common designators.
+	BlackAndWhite   YesNo  `xml:"BlackAndWhite,omitempty"`   // Whether the book is in black and white.
+	Manga           Manga  `xml:"Manga,omitempty"`           // Whether the book is a manga. This also defines the reading direction as right-to-left when set to YesAndRightToLeft.
+	Pages           Pages  `xml:"Pages,omitempty"`           // Pages of the comic book. Each page should have an Image element with a file path to the image.
 	// According to the schema, each creator element can only be present once. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
 	Writer      string `xml:"Writer,omitempty"`      // Person or organization responsible for creating the scenario.
 	Penciller   string `xml:"Penciller,omitempty"`   // Person or organization responsible for drawing the art.
@@ -72,6 +72,7 @@ func (ci ComicInfov1) Encode(output io.Writer) (err error) {
 }
 
 // MarshalXML implements the xml.Marshaler interface to automatically add schema attributes.
+// User should use Encode() instead of this method directly. This method is used internally by Encode().
 func (ci ComicInfov1) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	type Mask ComicInfov1
 	type attr struct {
@@ -89,7 +90,7 @@ func (ci ComicInfov1) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 // Validate checks if some of the fields with particular constraints are valid. It returns an error if any field fails validation.
 func (ci ComicInfov1) Validate() (err error) {
 	// URL(s)
-	for index, URL := range strings.Split(ci.Language, " ") {
+	for index, URL := range strings.Split(ci.Web, " ") {
 		if _, err = url.Parse(URL); err != nil {
 			return fmt.Errorf("failed to validate URL #%d: %w", index, err)
 		}
@@ -101,11 +102,11 @@ func (ci ComicInfov1) Validate() (err error) {
 		}
 	}
 	// BlackAndWhite
-	if !isV1YesNoValid(ci.BlackAndWhite) {
+	if !ci.BlackAndWhite.IsValid() {
 		return fmt.Errorf("failed to validate BlackAndWhite: unknown value %q", ci.BlackAndWhite)
 	}
 	// Manga
-	if !isV2MangaValid(ci.Manga) {
+	if !ci.Manga.IsValid() {
 		return fmt.Errorf("failed to validate Manga: unknown value %q", ci.Manga)
 	}
 	// Pages
@@ -115,8 +116,16 @@ func (ci ComicInfov1) Validate() (err error) {
 	return
 }
 
-func isV1YesNoValid(value string) bool {
-	switch value {
+type YesNo string
+
+const (
+	Unknown YesNo = "Unknown"
+	No      YesNo = "No"
+	Yes     YesNo = "Yes"
+)
+
+func (yn YesNo) IsValid() bool {
+	switch yn {
 	case "", Unknown, No, Yes:
 		return true
 	default:
@@ -124,9 +133,27 @@ func isV1YesNoValid(value string) bool {
 	}
 }
 
-type PagesV1 []PageV1
+type Manga string
 
-func (ps PagesV1) Validate() (err error) {
+const (
+	MangaUnknown           Manga = "Unknown"
+	MangaNo                Manga = "No"
+	MangaYes               Manga = "Yes"
+	MangaYesAndRightToLeft Manga = "YesAndRightToLeft"
+)
+
+func (m Manga) IsValid() bool {
+	switch m {
+	case "", MangaUnknown, MangaNo, MangaYes, MangaYesAndRightToLeft:
+		return true
+	default:
+		return false
+	}
+}
+
+type Pages []Page
+
+func (ps Pages) Validate() (err error) {
 	keys := make(map[string]struct{}, len(ps))
 	var ok bool
 	for i, p := range ps {
@@ -141,17 +168,17 @@ func (ps PagesV1) Validate() (err error) {
 	return
 }
 
-type PageV1 struct {
-	Image       int        `xml:"Image,attr"`
-	Type        PageTypeV1 `xml:"Type,attr"`
-	DoublePage  bool       `xml:"DoublePage,attr"`
-	ImageSize   int64      `xml:"ImageSize,attr"`
-	Key         string     `xml:"Key,attr"`
-	ImageWidth  int        `xml:"ImageWidth,attr"`
-	ImageHeight int        `xml:"ImageHeight,attr"`
+type Page struct {
+	Image       int      `xml:"Image,attr"`
+	Type        PageType `xml:"Type,attr"`
+	DoublePage  bool     `xml:"DoublePage,attr"`
+	ImageSize   int64    `xml:"ImageSize,attr"`
+	Key         string   `xml:"Key,attr"`
+	ImageWidth  int      `xml:"ImageWidth,attr"`
+	ImageHeight int      `xml:"ImageHeight,attr"`
 }
 
-func (p *PageV1) Validate() (err error) {
+func (p *Page) Validate() (err error) {
 	if !p.Type.Valid() {
 		return fmt.Errorf("invalid page type: %q", p.Type)
 	}
@@ -164,25 +191,26 @@ func (p *PageV1) Validate() (err error) {
 	return
 }
 
-type PageTypeV1 string
+type PageType string
 
 const (
-	FrontCover    PageTypeV1 = "FrontCover"
-	InnerCover    PageTypeV1 = "InnerCover"
-	Roundup       PageTypeV1 = "Roundup"
-	Story         PageTypeV1 = "Story"
-	Advertisement PageTypeV1 = "Advertisement"
-	Editorial     PageTypeV1 = "Editorial"
-	Letters       PageTypeV1 = "Letters"
-	Preview       PageTypeV1 = "Preview"
-	BackCover     PageTypeV1 = "BackCover"
-	Other         PageTypeV1 = "Other"
-	Deleted       PageTypeV1 = "Deleted"
+	FrontCover    PageType = "FrontCover"
+	InnerCover    PageType = "InnerCover"
+	Roundup       PageType = "Roundup"
+	Story         PageType = "Story"
+	Advertisement PageType = "Advertisement"
+	Editorial     PageType = "Editorial"
+	Letters       PageType = "Letters"
+	Preview       PageType = "Preview"
+	BackCover     PageType = "BackCover"
+	Other         PageType = "Other"
+	Deleted       PageType = "Deleted"
 )
 
-func (pt PageTypeV1) Valid() bool {
+func (pt PageType) Valid() bool {
 	switch pt {
-	case FrontCover, InnerCover, Roundup, Story, Advertisement, Editorial, Letters, Preview, BackCover, Other, Deleted:
+	case FrontCover, InnerCover, Roundup, Story, Advertisement,
+		Editorial, Letters, Preview, BackCover, Other, Deleted:
 		return true
 	default:
 		return false
