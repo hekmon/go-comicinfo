@@ -11,10 +11,11 @@ const (
 	v2SchemaLocationURL = "https://raw.githubusercontent.com/anansi-project/comicinfo/refs/heads/main/schema/v2.0/ComicInfo.xsd"
 )
 
-// ComicInfoComicInfov2 represents the structure of a version 2 ComicInfo.xml file.
+// ComicInfov2 represents the structure of a version 2 ComicInfo.xml file.
 type ComicInfov2 struct {
 	ComicInfov1
-	Day                 int      `xml:"Day,omitempty"`                 // Usually contains the release date of the book.Characters          string   `xml:"Characters,omitempty"`          // Characters present in the book. It is accepted that multiple values are comma separated.
+	Day                 int      `xml:"Day,omitempty"`                 // Usually contains the release date of the book.
+	Characters          string   `xml:"Characters,omitempty"`          // Characters present in the book. It is accepted that multiple values are comma separated.
 	Teams               string   `xml:"Teams,omitempty"`               // Teams present in the book. Usually refer to super-hero teams (e.g. Avengers). It is accepted that multiple values are comma separated.
 	Locations           string   `xml:"Locations,omitempty"`           // Locations mentioned in the book. It is accepted that multiple values are comma separated.
 	ScanInformation     string   `xml:"ScanInformation,omitempty"`     // A free text field, usually used to store information about who scanned the book.
