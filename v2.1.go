@@ -90,6 +90,7 @@ func (ci ComicInfov21) Encode(output io.Writer) (err error) {
 // MarshalXML implements the xml.Marshaler interface to automatically add schema attributes.
 // User should use Encode() instead of this method directly. This method is used internally by Encode().
 func (ci ComicInfov21) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	start.Name.Local = "ComicInfo" // Correct name for root name
 	type Mask ComicInfov21
 	type attr struct {
 		Mask
