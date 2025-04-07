@@ -172,7 +172,7 @@ type Page struct {
 	Image       int      `xml:"Image,attr"`
 	Type        PageType `xml:"Type,attr"`
 	DoublePage  bool     `xml:"DoublePage,attr"`
-	ImageSize   int64    `xml:"ImageSize,attr"`
+	ImageSize   int      `xml:"ImageSize,attr"`
 	Key         string   `xml:"Key,attr"`
 	ImageWidth  int      `xml:"ImageWidth,attr"`
 	ImageHeight int      `xml:"ImageHeight,attr"`
@@ -194,23 +194,23 @@ func (p *Page) Validate() (err error) {
 type PageType string
 
 const (
-	FrontCover    PageType = "FrontCover"
-	InnerCover    PageType = "InnerCover"
-	Roundup       PageType = "Roundup"
-	Story         PageType = "Story"
-	Advertisement PageType = "Advertisement"
-	Editorial     PageType = "Editorial"
-	Letters       PageType = "Letters"
-	Preview       PageType = "Preview"
-	BackCover     PageType = "BackCover"
-	Other         PageType = "Other"
-	Deleted       PageType = "Deleted"
+	PageTypeFrontCover    PageType = "FrontCover"
+	PageTypeInnerCover    PageType = "InnerCover"
+	PageTypeRoundup       PageType = "Roundup"
+	PageTypeStory         PageType = "Story"
+	PageTypeAdvertisement PageType = "Advertisement"
+	PageTypeEditorial     PageType = "Editorial"
+	PageTypeLetters       PageType = "Letters"
+	PageTypePreview       PageType = "Preview"
+	PageTypeBackCover     PageType = "BackCover"
+	PageTypeOther         PageType = "Other"
+	PageTypeDeleted       PageType = "Deleted"
 )
 
 func (pt PageType) Valid() bool {
 	switch pt {
-	case FrontCover, InnerCover, Roundup, Story, Advertisement,
-		Editorial, Letters, Preview, BackCover, Other, Deleted:
+	case PageTypeFrontCover, PageTypeInnerCover, PageTypeRoundup, PageTypeStory, PageTypeAdvertisement,
+		PageTypeEditorial, PageTypeLetters, PageTypePreview, PageTypeBackCover, PageTypeOther, PageTypeDeleted:
 		return true
 	default:
 		return false

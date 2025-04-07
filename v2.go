@@ -37,7 +37,7 @@ type ComicInfov2 struct {
 	Web                 string           `xml:"Web,omitempty"`                 // A URL pointing to a reference website for the book. It is accepted that multiple values are space separated (as spaces in URL will be encoded as %20).
 	PageCount           int              `xml:"PageCount,omitempty"`           // The number of pages in the book.
 	LanguageISO         string           `xml:"LanguageISO,omitempty"`         // ISO code of the language the book is written in. You can use "golang.org/x/text/language" to get valid codes, eg language.English.String()
-	Format              string           `xml:"format,omitempty"`              // The original publication's binding format for scanned physical books or presentation format for digital sources. "TBP", "HC", "Web", "Digital" are common designators.
+	Format              string           `xml:"Format,omitempty"`              // The original publication's binding format for scanned physical books or presentation format for digital sources. "TBP", "HC", "Web", "Digital" are common designators.
 	BlackAndWhite       YesNo            `xml:"BlackAndWhite,omitempty"`       // Whether the book is in black and white.
 	Manga               Manga            `xml:"Manga,omitempty"`               // Whether the book is a manga. This also defines the reading direction as right-to-left when set to YesAndRightToLeft.
 	Characters          string           `xml:"Characters,omitempty"`          // Characters present in the book. It is accepted that multiple values are comma separated.
@@ -51,7 +51,9 @@ type ComicInfov2 struct {
 	CommunityRating     *CommunityRating `xml:"CommunityRating,omitempty"`     // Community rating of the book, from 0.0 to 5.0, 2 digits allowed.
 	MainCharacterOrTeam string           `xml:"MainCharacterOrTeam,omitempty"` // Main character or team mentioned in the book. It is accepted that a single value should be present.
 	Review              string           `xml:"Review,omitempty"`              // Review of the book.
+
 	// According to the schema, each creator element can only be present once. In order to cater for multiple creator with the same role, it is accepted that values are comma separated.
+
 	Writer      string `xml:"Writer,omitempty"`      // Person or organization responsible for creating the scenario.
 	Penciller   string `xml:"Penciller,omitempty"`   // Person or organization responsible for drawing the art.
 	Inker       string `xml:"Inker,omitempty"`       // Person or organization responsible for inking the pencil art.
@@ -187,8 +189,27 @@ func (ps PagesV2) Validate() (err error) {
 }
 
 type PageV2 struct {
-	Page
-	Bookmark string `xml:"Bookmark,attr"`
+	Image       int      `xml:"Image,attr"`
+	Type        PageType `xml:"Type,attr"`
+	DoublePage  bool     `xml:"DoublePage,attr"`
+	ImageSize   int      `xml:"ImageSize,attr"`
+	Key         string   `xml:"Key,attr"`
+	Bookmark    string   `xml:"Bookmark,attr"`
+	ImageWidth  int      `xml:"ImageWidth,attr"`
+	ImageHeight int      `xml:"ImageHeight,attr"`
+}
+
+func (p *PageV2) Validate() (err error) {
+	if !p.Type.Valid() {
+		return fmt.Errorf("invalid page type: %q", p.Type)
+	}
+	if !(p.ImageWidth > 0 || p.ImageWidth == -1) {
+		return errors.New("image width must be greater than 0 or -1")
+	}
+	if !(p.ImageHeight > 0 || p.ImageHeight == -1) {
+		return errors.New("image height must be greater than 0 or -1")
+	}
+	return
 }
 
 type CommunityRating float64

@@ -38,7 +38,7 @@ type ComicInfov21 struct {
 	Web                 string              `xml:"Web,omitempty"`                 // A URL pointing to a reference website for the book. It is accepted that multiple values are space separated (as spaces in URL will be encoded as %20).
 	PageCount           int                 `xml:"PageCount,omitempty"`           // The number of pages in the book.
 	LanguageISO         string              `xml:"LanguageISO,omitempty"`         // ISO code of the language the book is written in. You can use "golang.org/x/text/language" to get valid codes, eg language.English.String()
-	Format              string              `xml:"format,omitempty"`              // The original publication's binding format for scanned physical books or presentation format for digital sources. "TBP", "HC", "Web", "Digital" are common designators.
+	Format              string              `xml:"Format,omitempty"`              // The original publication's binding format for scanned physical books or presentation format for digital sources. "TBP", "HC", "Web", "Digital" are common designators.
 	BlackAndWhite       YesNo               `xml:"BlackAndWhite,omitempty"`       // Whether the book is in black and white.
 	Manga               Manga               `xml:"Manga,omitempty"`               // Whether the book is a manga. This also defines the reading direction as right-to-left when set to YesAndRightToLeft.
 	Characters          string              `xml:"Characters,omitempty"`          // Characters present in the book. It is accepted that multiple values are comma separated.
