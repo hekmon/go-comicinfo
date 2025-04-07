@@ -1,2 +1,3 @@
-# go-comicinfo
-Easily generate valid ComicInfo.xml in Go
+# Comic Info
+
+Easily generate valid `ComicInfo.xml` in Golang.
