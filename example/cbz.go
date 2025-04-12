@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hekmon/comicinfo"
+	"github.com/hekmon/go-comicinfo"
 )
 
 func writeCBZChapter(chapter Chapter, outputDir string) (err error) {
