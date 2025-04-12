@@ -1,4 +1,4 @@
-module github.com/hekmon/comicinfo
+module github.com/hekmon/go-comicinfo
 
 go 1.24.1
 
