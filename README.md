@@ -22,4 +22,4 @@ go get -u github.com/hekmon/go-comicinfo
 import "github.com/hekmon/comicinfo"
 ```
 
-See the CBZ creation example in the `example/cbz.go` file.
+See the CBZ creation [example](example/cbz.go) for a full usage example.
