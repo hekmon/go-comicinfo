@@ -18,8 +18,4 @@ go get -u github.com/hekmon/go-comicinfo
 
 ## Example Usage
 
-```go
-import "github.com/hekmon/comicinfo"
-```
-
 See the CBZ creation [example](example/cbz.go) for a full usage example.
